@@ -9,7 +9,6 @@ function changeContent() {
     for (const cnt of content) {
         cnt.className = 'tab__content'
     }
-
     let arrayIndex = tabs.indexOf(this)
 
     tabs[arrayIndex].className = 'tab tab_active';
@@ -19,11 +18,3 @@ function changeContent() {
 for (const tbs of tabs) {
     tbs.onclick = changeContent;
 }
-
-
-// Можно ли таким было способом решить?
-// 
-// tabs.addEventListener('click', () => {
-//     document.querySelector('.tab').classList.add('.tab_active')
-//     document.querySelector('.tab__content').classList.add('.tab__content_active')
-// })

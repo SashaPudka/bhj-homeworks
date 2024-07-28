@@ -1,21 +1,19 @@
-let value = document.querySelector('div.dropdown__value')
-let link = Array.from(document.querySelector('a.dropdown__link'))
-
+let value = document.querySelector('.dropdown__value')
+let drItem = Array.from(document.querySelectorAll('.dropdown__item'))
 
 function openAndCloseMenu() {
     let list = document.querySelector('.dropdown__list')
-
-    list.classList.contains('.dropdown__list_active') ? 
-    list.classList.remove('.dropdown__list') : 
-    list.classList.add('.dropdown__list_active');
+    list.classList.toggle('dropdown__list_active')
 }
-    value.addEventListener('click', openAndCloseMenu)
 
-link.forEach((item) => {
-    item.onclick = function() {
-        document.querySelector('dropdown__value').textContent = item.textContent
-    }
-    item.addEventListener('click', openAndCloseMenu)
+value.addEventListener('click', openAndCloseMenu)
+
+        drItem.forEach((item) => {
+            item.onclick = function() {
+            document.querySelector('.dropdown__value').textContent = item.textContent;
+            return false;
+            }
+        item.addEventListener('click', openAndCloseMenu)
 })
 
 

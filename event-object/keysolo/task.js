@@ -16,30 +16,27 @@ class Game {
     this.lossElement.textContent = 0;
   }
 
+  // HomeWork
   registerEvents() {
-    document.addEventListener('keydown', event);
 
-    const current = this.currentSymbol
+  let current = this;
+  
+  document.addEventListener('keydown',
+    function () {
+      let cur = current.currentSymbol.textContent.toUpperCase();
 
-    function event (event) {
-      const eventItem = event.key.charCodeAt(0);
-      const currentItem = current.textContent.charCodeAt(0);
+      let eventItem = String.fromCharCode(event.keyCode)
+      // говорят эта история устарела
 
-      if (eventItem === currentItem) {
-        this.success()
+      if (eventItem == cur) {
+        current.success()
       } else {
-        this.fail()
+        current.fail()
       }
     }
-    /*
-      TODO:
-      Написать обработчик события, который откликается
-      на каждый введённый символ.
-      В случае правильного ввода символа вызываем this.success()
-      При неправильном вводе символа - this.fail();
-      DOM-элемент текущего символа находится в свойстве this.currentSymbol.
-     */
-  }
+  )
+}
+  // 
 
   success() {
     if(this.currentSymbol.classList.contains("symbol_current")) this.currentSymbol.classList.remove("symbol_current");
