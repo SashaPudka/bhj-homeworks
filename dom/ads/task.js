@@ -1,15 +1,22 @@
-let rotator = Array.from(document.querySelectorAll('rotator__case'))
+const elements = [...document.querySelectorAll('.rotator__case')]
+const activeClass = 'rotator__case_active'
 
-console.log(rotator);
 
-function item () {
-    rotator.forEach ((el) => {
-        el.classList.toggle('rotator__case_active')
-    })
+let activeElementIndex = elements.findIndex( item => 
+    item.classList.contains(activeClass));
+
+const getIndex = () => activeElementIndex === elements.length - 1 ? 0 : activeElementIndex + 1;
+
+const rotatorFunc = () => {
+    const currentCase = elements[activeElementIndex];
+    const nextIndex = getIndex();
+    const nextCase = elements[nextIndex];
+
+    currentCase.classList.remove(activeClass);
+    nextCase.classList.add(activeClass);
+
+    activeElementIndex = nextIndex;
+
 }
 
-setInterval(item, 1000);
-
-// не вышло, подскажите где ошибка :)
-// в какиех случаях надо перед названием класса ставить точку?
-// 'rotator__case' or '.rotator__case' или это зависит использую я queryS или ClassN
+setInterval(rotatorFunc, 1000);
