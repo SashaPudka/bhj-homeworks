@@ -6,25 +6,50 @@ let cart = document.querySelector('.cart__products')
 for (let i of controlCount) {
     i.addEventListener('click', addCount)
 }
+
+for( let i of productAdd) {
+    i.addEventListener('click', addCart)
+}
+
     // фукция счетчик
 
 function addCount(event) {
-    let value = document.querySelector('.product__quantity-value')
+    let value = event.target.parentNode.querySelector('.product__quantity-value')
     let count = +value.innerText;
 
     if (event.target.classList.contains('product__quantity-control_inc')) {
-        count + 1 
+        value.innerText = Number(value.innerText) + 1;
     }
-        else {
-            if (count > 1) {
-                count - 1
-            }
+        else if (count > 1) {
+        value.innerText = Number(value.innerText) - 1;
         }
     }
 
     // функция по добавлению карточки
 
-    function addCart () {
-        
-    }
+    function addCart (event) {
+        const product = event.target.closest('.product')
+        const id = product.dataset.id
+        const countInProd = product.querySelector('.product__quantity-value').innerText;
+        const imgProd = product.querySelector('.cart__product-image').src
 
+
+       cart.insertAdjacentHTML('afterbegin', `<div class="cart__product" data-id=${id}>
+                                              <img class="cart__product-image" src=${imgProd}>
+                                              <div class="cart__product-count">${countInProd}</div>
+                                              </div>`)
+
+
+        const productInCard = [...cart].find((cart) =>
+            cart.dataset.id === id 
+        );
+        // должно вернуться true
+        if (productInCard) {
+          // увеличивать количество 
+          countInProd.innerText = Number(countInProd.innerText) + 1;
+        } else {
+          // добавлять новый элемент продукта
+
+        }
+
+    }
