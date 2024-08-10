@@ -6,6 +6,7 @@ let buttonAdd = document.querySelector('.tasks__add')
 
 function addTask (event) {
     const inputValue = document.querySelector('.tasks__input')
+    event.preventDefault();
 
     if (inputValue.value.trim()) {
         event.preventDefault();
@@ -19,9 +20,7 @@ function addTask (event) {
              </div>`)
 
         formField.reset();
-    } else if (inputValue.value.trim() === '') {
-        alert('Введите задачу в поле :)')
-    }
+    }  
 }
 
 buttonAdd.addEventListener('click', addTask);

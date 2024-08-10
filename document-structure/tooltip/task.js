@@ -15,12 +15,6 @@ elements.forEach( element => {
             newElement.style.left = `${element.getBoundingClientRect().left}px`;
             newElement.style.top = `${element.getBoundingClientRect().bottom}px`;
 
-        
-        // let result = arr.find(function(item, index, array) {
-        //     // если true - возвращается текущий элемент и перебор прерывается
-        //     // если все итерации оказались ложными, возвращается undefined
-        //   });
-
         let activeClass = Array.from(document.querySelectorAll('.tooltip_active'))
         let result = activeClass.find(newElement => newElement.classList.contains('tooltip_active'))
 

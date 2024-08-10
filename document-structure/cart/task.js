@@ -1,6 +1,6 @@
 let controlCount = document.querySelectorAll('.product__quantity-control')
 let productAdd = document.querySelectorAll('.product__add')
-let cart = document.querySelector('.cart__products')
+let cartAdd = document.querySelector('.cart__products')
 
 
 for (let i of controlCount) {
@@ -28,28 +28,28 @@ function addCount(event) {
     // функция по добавлению карточки
 
     function addCart (event) {
+
         const product = event.target.closest('.product')
         const id = product.dataset.id
+        const productCount = +event.target.parentNode.querySelector('.product__quantity-value').innerText
+
+        for ( let i of cartAdd.children) {
+            if (i.dataset.id === id) {
+                let newCount = i.querySelector('.cart__product-count');
+                let total = +newCount.innerText
+                newCount.innerText = total + productCount; //sum
+
+                return false
+            }
+        }
+
         const countInProd = product.querySelector('.product__quantity-value').innerText;
-        const imgProd = product.querySelector('.cart__product-image').src
+        const imgProd = product.querySelector('.product__image').src;
 
 
-       cart.insertAdjacentHTML('afterbegin', `<div class="cart__product" data-id=${id}>
-                                              <img class="cart__product-image" src=${imgProd}>
+       cartAdd.insertAdjacentHTML('afterBegin', `<div class="cart__product" data-id=${id}>
+                                              <img class="cart__product-image" src='${imgProd}'>
                                               <div class="cart__product-count">${countInProd}</div>
                                               </div>`)
-
-
-        const productInCard = [...cart].find((cart) =>
-            cart.dataset.id === id 
-        );
-        // должно вернуться true
-        if (productInCard) {
-          // увеличивать количество 
-          countInProd.innerText = Number(countInProd.innerText) + 1;
-        } else {
-          // добавлять новый элемент продукта
-
-        }
 
     }
