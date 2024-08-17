@@ -28,28 +28,23 @@ function addCount(event) {
     // функция по добавлению карточки
 
     function addCart (event) {
-
+        
+        const cards = Array.from(document.querySelectorAll('.cart__products'));
         const product = event.target.closest('.product')
-        const id = product.dataset.id
-        const productCount = +event.target.parentNode.querySelector('.product__quantity-value').innerText
-
-        for ( let i of cartAdd.children) {
-            if (i.dataset.id === id) {
-                let newCount = i.querySelector('.cart__product-count');
-                let total = +newCount.innerText
-                newCount.innerText = total + productCount; //sum
-
-                return false
-            }
-        }
-
-        const countInProd = product.querySelector('.product__quantity-value').innerText;
+        const id = product.dataset.id;
+        const countFromProduct = +event.target.parentNode.querySelector('.product__quantity-value').innerText;
         const imgProd = product.querySelector('.product__image').src;
 
-
-       cartAdd.insertAdjacentHTML('afterBegin', `<div class="cart__product" data-id=${id}>
+        const productInCard = cards.find(elm => elm.dataset.id === id);
+        if (productInCard) {
+                let newCount = productInCard.querySelector('.cart__product-count');
+                let total = +newCount.innerText
+                newCount.innerText = total + countFromProduct; //sum
+            
+        } else {
+            cartAdd.insertAdjacentHTML('afterBegin', `<div class="cart__product" data-id=${id}>
                                               <img class="cart__product-image" src='${imgProd}'>
-                                              <div class="cart__product-count">${countInProd}</div>
+                                              <div class="cart__product-count">${countFromProduct}</div>
                                               </div>`)
-
+        }
     }
