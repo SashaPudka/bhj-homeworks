@@ -29,7 +29,7 @@ function addCount(event) {
 
     function addCart (event) {
         
-        const cards = Array.from(document.querySelectorAll('.cart__products'));
+        const cards = Array.from(document.querySelectorAll('.cart__product'));
         const product = event.target.closest('.product')
         const id = product.dataset.id;
         const countFromProduct = +event.target.parentNode.querySelector('.product__quantity-value').innerText;
